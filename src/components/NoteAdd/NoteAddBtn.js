@@ -1,23 +1,35 @@
-import React from 'react';
+import {React,useState} from 'react';
 import NoteEditor from '../NoteEditor/NoteEditor';
 
-
-const NoteAddBtn = ({editorView, setEditorView}) => {
+const NoteAddBtn = () => {
+    const [editorView, setEditorView] = useState(false);
 
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
 
-    const editData = {
+    const [editorContent, setEditorContent] = useState(
+        {
         id: Date.now(),
         title: today.toDateString(),
         content:""
+    });
+
+
+    function addNewHandler(content){
+        window.API.addNoteEntry(content)
     }
  
     return (
         <div>
             {editorView ? 
-            <NoteEditor setEditorView={setEditorView} editData={editData}></NoteEditor>
-            : <button onClick={()=>{setEditorView(true)}}> add note</button>}
+            <NoteEditor setEditorView={setEditorView} setEditorContent={setEditorContent} editorContent={editorContent} saveHandler={addNewHandler}></NoteEditor>
+            : <button onClick={()=>{
+                setEditorContent(    {
+                    id: Date.now(),
+                    title: today.toDateString(),
+                    content:""
+                })
+                setEditorView(true)}}>add note</button>}
         </div>
     );
 }

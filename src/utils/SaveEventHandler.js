@@ -1,4 +1,10 @@
-export function saveNew(){}
+export function saveNew(saveData){
+    console.log("save new called");
+
+    
+    window.API.addNoteEntry(saveData)
+    
+}
 export function saveEdit(){}
 
-module.exports = {saveNew, saveEdit}
+// export  {saveNew, saveEdit}

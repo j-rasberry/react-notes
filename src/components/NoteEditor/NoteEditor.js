@@ -1,18 +1,8 @@
 import {React,useState} from 'react';
 import './NoteAdd.css'
 
-const NoteEditor = ({editorView, setEditorView, setEditorContent, editorContent}) => {
+const NoteEditor = ({setEditorView,editorContent, saveHandler}) => {
 
-    function handleSave(){
-
-        const saveData = {
-            id: Date.now(),
-            title: document.getElementById('title-input').value,
-            content: document.getElementById('content-input').value
-        }
-        
-        window.API.addNoteEntry(saveData)
-    }
     const [error, setError] = useState("");
     function contentValidation(){
    
@@ -27,8 +17,6 @@ const NoteEditor = ({editorView, setEditorView, setEditorContent, editorContent}
          return false;
 
     }
-  
-
     return (
         <div className='note-add-window-wrapper'>
              <p className='error-text'>{error}</p>
@@ -37,19 +25,17 @@ const NoteEditor = ({editorView, setEditorView, setEditorContent, editorContent}
             <div> 
                 <button onClick={()=>{
                     setEditorView(false)
-                    setEditorContent({
-                        id:"",
-                        title:"",
-                        content:""
-                    })
                 }}>cancel</button>
                 <button onClick={()=>{
                     if(contentValidation()){
-                        handleSave()
+
+                        // TODO: create switch statement for editor data handling types
+                         saveHandler(JSON.stringify({ 
+                            id: Date.now(),
+                           title: document.getElementById('title-input').value,
+                           content: document.getElementById('content-input').value}))
+                           setEditorView(false)
                     }
-                    
-                    
-                    setEditorView(false)
                 }}>save</button>
             </div>
         

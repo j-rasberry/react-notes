@@ -38,8 +38,9 @@ app.whenReady().then(()=>{
     win.setTitle(title)
   });
   
+  //Must send json data as a string.
   ipcMain.on('add-note-entry', (event, data)=>{
-    dataHandler.addEntry(JSON.stringify(data))
+    dataHandler.addEntry(data)
    
   });
 
