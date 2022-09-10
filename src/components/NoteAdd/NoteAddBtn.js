@@ -22,7 +22,12 @@ const NoteAddBtn = () => {
     return (
         <div>
             {editorView ? 
-            <NoteEditor setEditorView={setEditorView} setEditorContent={setEditorContent} editorContent={editorContent} saveHandler={addNewHandler}></NoteEditor>
+            <NoteEditor 
+            setEditorView={setEditorView} 
+            setEditorContent={setEditorContent}
+            editorContent={editorContent} 
+            saveHandler={addNewHandler}
+            ></NoteEditor>
             : <button onClick={()=>{
                 setEditorContent(    {
                     id: Date.now(),

@@ -10,11 +10,15 @@ const NoteEntryList = () => {
         title:"",
         content:""
     });
+    function saveEditHandler(data){
+        console.log(`after edit data to save: ${data}`);
+        
+    }
     return (
         <div>
             <NoteEntries editorView={editorView} setEditorView={setEditorView} editorContent={editorContent} setEditorContent={setEditorContent} ></NoteEntries>
             {editorView ? 
-            <NoteEditor editorContent={editorContent} setEditorView={setEditorView} setEditorContent={setEditorContent}></NoteEditor>
+            <NoteEditor editorContent={editorContent} setEditorView={setEditorView} setEditorContent={setEditorContent} saveHandler={saveEditHandler}></NoteEditor>
                 :<></>}
 
         </div>

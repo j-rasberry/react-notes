@@ -19,6 +19,7 @@ const NoteEditor = ({setEditorView,editorContent, saveHandler}) => {
     }
     return (
         <div className='note-add-window-wrapper'>
+            
              <p className='error-text'>{error}</p>
             <input id='title-input' defaultValue={editorContent.title}></input>
             <textarea id='content-input' className='note-text-input' placeholder='note' defaultValue={editorContent.content}></textarea>
@@ -30,8 +31,10 @@ const NoteEditor = ({setEditorView,editorContent, saveHandler}) => {
                     if(contentValidation()){
 
                         // TODO: create switch statement for editor data handling types
-                         saveHandler(JSON.stringify({ 
-                            id: Date.now(),
+                        console.log("Before edit data :" + editorContent);
+                         
+                        saveHandler(JSON.stringify({ 
+                            id: editorContent.id,
                            title: document.getElementById('title-input').value,
                            content: document.getElementById('content-input').value}))
                            setEditorView(false)
