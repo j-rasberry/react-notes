@@ -56,10 +56,23 @@ app.whenReady().then(()=>{
 
     
   });
+  ipcMain.handle('save-edit-note-entry', async (event, data)=>{
+    let editData = await dataHandler.saveEdit(data)
+    console.log(`handle edit data ${editData}`);
+    
+    if(editData == null){
+      return -1;
+    }else{
+      return 1;
+    }
 
-  ipcMain.on('delete-note-entry', (event, data)=>{
-    console.log("data" + JSON.stringify(data));
-    console.log(data.title);
+    
+  });
+
+  ipcMain.on('delete-note-entry', (event, id)=>{
+    console.log(id);
+    
+    dataHandler.deleteEntry(id)
   });
 
   createWindow()

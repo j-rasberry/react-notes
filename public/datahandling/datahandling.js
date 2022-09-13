@@ -52,24 +52,31 @@ const editEntry = (id)=>{
       
 
 }
+const saveEdit = (content)=>{
+    console.log("Save edit called");
+    
+content = JSON.parse(content);
+let oldData = fs.readFileSync(path.join(__dirname,'./../../src/data/notes.json'),'utf8')
+oldData = JSON.parse(oldData)
+let objIndex = _.findIndex(oldData,{id:content.id})
+oldData.splice(objIndex, 1, {id: content.id, title: content.title, content: content.content});
+
+console.log();
+fs.writeFileSync(path.join(__dirname,'./../../src/data/notes.json'), JSON.stringify(oldData), 'utf-8')
+
+
+ 
+}
 const deleteEntry = (id)=>{
-    console.log("editEntry Called");
+    console.log("delete Called");
     
     let oldData = fs.readFileSync(path.join(__dirname,'./../../src/data/notes.json'),'utf8')
-    console.log(oldData);
-    oldData = JSON.parse(oldData)
-    Object.keys(oldData).forEach(function(key){
-        if (oldData[key] === id) {
-            console.log(oldData[key]);
-            // Deletes the id , title and, content
-          delete oldData[key];
-          delete oldData[key + 1];
-          delete oldData[key + 2];
-        }
-      });
-      console.log(JSON.stringify(oldData));
+    oldData = JSON.parse(oldData);
+    let data =  _.reject(oldData, {id:id})
+    console.log(`data: ----- \n ${JSON.stringify(data) } \n ----`);
+    
 
-      fs.writeFileSync(path.join(__dirname,'./../../src/data/notes.json'), JSON.stringify(oldData), 'utf-8')
+      fs.writeFileSync(path.join(__dirname,'./../../src/data/notes.json'), JSON.stringify(data), 'utf-8')
 
 }
 
@@ -79,3 +86,4 @@ exports.checkUserData = userDataCheck;
 exports.addEntry = addEntry;
 exports.editEntry = editEntry;
 exports.deleteEntry = deleteEntry;
+exports.saveEdit = saveEdit;

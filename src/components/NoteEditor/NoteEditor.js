@@ -29,10 +29,6 @@ const NoteEditor = ({setEditorView,editorContent, saveHandler}) => {
                 }}>cancel</button>
                 <button onClick={()=>{
                     if(contentValidation()){
-
-                        // TODO: create switch statement for editor data handling types
-                        console.log("Before edit data :" + editorContent);
-                         
                         saveHandler(JSON.stringify({ 
                             id: editorContent.id,
                            title: document.getElementById('title-input').value,

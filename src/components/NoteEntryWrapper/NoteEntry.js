@@ -28,6 +28,9 @@ const NoteEntry = ({setEditorView, editorContent, setEditorContent}) => {
         }}
             
             >edit</button>
+            <button onClick={()=>{
+                window.API.deleteNoteEntry(data.id)
+            }}></button>
             <p></p>
                         </div>
                 )
