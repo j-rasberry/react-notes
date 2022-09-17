@@ -1,0 +1,22 @@
+.entry-wrapper {
+    display: flex;
+    margin: 1em;
+    justify-content: space-between;
+    max-width: 100vw;
+
+}
+
+
+.entry {
+    padding: 1em;
+    width: 100%;
+}
+
+.entry:hover {
+    background: red;
+}
+
+.entry-button-delete {
+    height: 2em;
+    width: 2em;
+}

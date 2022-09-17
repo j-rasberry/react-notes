@@ -25,13 +25,25 @@ function createWindow() {
   );
   // Open the DevTools.
   if (isDev) {
-    win.webContents.openDevTools({ mode: 'detach' });
+    win.webContents.openDevTools({ mode: 'right' });
   }
 }
 
 app.whenReady().then(()=>{
 
-  dataHandler.checkUserData();
+
+  ipcMain.handle('load-user-data', async (event)=>{
+    let userData = await dataHandler.checkUserData();
+    console.log(userData);
+    
+    if(userData == null){
+      return -1;
+    }else{
+      return userData;
+    }
+
+    
+  });
   ipcMain.on('set-title', (event, title)=>{
     const webContents = event.sender
     const win = BrowserWindow.fromWebContents(webContents)

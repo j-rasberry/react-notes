@@ -2,8 +2,9 @@ import {React,useState} from 'react';
 import NoteEditor from '../NoteEditor/NoteEditor';
 import NoteEntries from './NoteEntry';
 
-const NoteEntryList = () => {
+const NoteEntryList = ({forceRender,setForceRender}) => {
     const [editorView, setEditorView] = useState(false);
+
     const [editorContent, setEditorContent] = useState({
         id:"",
         title:"",
@@ -21,6 +22,8 @@ const NoteEntryList = () => {
              setEditorView={setEditorView} 
              editorContent={editorContent} 
              setEditorContent={setEditorContent}
+             forceRender={forceRender}
+             setForceRender={setForceRender}
               ></NoteEntries>
             {editorView ? 
             <NoteEditor 
@@ -28,6 +31,10 @@ const NoteEntryList = () => {
              setEditorView={setEditorView} 
              setEditorContent={setEditorContent} 
              saveHandler={saveEditHandler}
+             forceRender={forceRender}
+             setForceRender={setForceRender}
+
+
              ></NoteEditor>
                 :<></>}
 

@@ -1,7 +1,7 @@
 import {React,useState} from 'react';
 import './NoteAdd.css'
 
-const NoteEditor = ({setEditorView,editorContent, saveHandler}) => {
+const NoteEditor = ({setEditorView,editorContent, saveHandler, forceRender, setForceRender}) => {
 
     const [error, setError] = useState("");
     function contentValidation(){
@@ -34,6 +34,7 @@ const NoteEditor = ({setEditorView,editorContent, saveHandler}) => {
                            title: document.getElementById('title-input').value,
                            content: document.getElementById('content-input').value}))
                            setEditorView(false)
+                           setForceRender(!forceRender)
                     }
                 }}>save</button>
             </div>

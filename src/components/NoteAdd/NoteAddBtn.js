@@ -1,7 +1,7 @@
 import {React,useState} from 'react';
 import NoteEditor from '../NoteEditor/NoteEditor';
 
-const NoteAddBtn = () => {
+const NoteAddBtn = ({forceRender,setForceRender}) => {
     const [editorView, setEditorView] = useState(false);
 
     const timeElapsed = Date.now();
@@ -27,6 +27,8 @@ const NoteAddBtn = () => {
             setEditorContent={setEditorContent}
             editorContent={editorContent} 
             saveHandler={addNewHandler}
+            forceRender={forceRender}
+            setForceRender={setForceRender}
             ></NoteEditor>
             : <button onClick={()=>{
                 setEditorContent(    {

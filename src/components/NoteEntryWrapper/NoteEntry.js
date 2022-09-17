@@ -1,23 +1,46 @@
-import {React} from 'react';
+import {React, useRef, useState ,useEffect} from 'react';
 
-import entires from './../../data/notes.json'
+import './entry.css'
 
 
-const NoteEntry = ({setEditorView, editorContent, setEditorContent}) => {
 
-  
+const NoteEntry = ({setEditorView, editorContent, setEditorContent ,forceRender, setForceRender}) => {
+    const [entires, setEntires] = useState([]);
+    let oldEntires = useRef([]);
+
+
+useEffect(() => {
+    console.log("effect calleed");
+    
+    window.API.loadUserData().then((res)=>{
+ 
+
+        
+        if(res === JSON.stringify(oldEntires.current)){
+            console.log("they are the");
+            
+        }else{
+             
+                
+            setEntires(JSON.parse(res))
+            oldEntires.current = JSON.parse(res);
+
+        }
+      
+     
+    })
+    
+
+});
 
     return (
         <div>
+           
             {entires.map((data,key)=>{
                 return(
-                    <div>
+                    <div className='entry-wrapper'>
                          
-                       
-                        <h1>{data.title}</h1>
-                        <p>{data.content}</p>
-                        {/* <p>{eSuccess}</p> */}
-               <button onClick={ async ()=>{
+                    <div className='entry' onClick={ async ()=>{
                 console.log("edit button clicked");
                 setEditorContent(await window.API.editNoteEntry(data.id))
                 console.log({editorContent});
@@ -25,11 +48,14 @@ const NoteEntry = ({setEditorView, editorContent, setEditorContent}) => {
                 setEditorView(true)
 
                 
-        }}
-            
-            >edit</button>
-            <button onClick={()=>{
+        }}>
+                        <h1 className='entry-title'>{data.title}</h1>
+                        <p className='entry-content'>{data.content}</p>
+                    </div>
+              
+            <button className='entry-button-delete' onClick={()=>{
                 window.API.deleteNoteEntry(data.id)
+                setForceRender(!forceRender)
             }}></button>
             <p></p>
                         </div>
