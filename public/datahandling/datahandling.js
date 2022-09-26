@@ -13,11 +13,9 @@ const checkUserData = async ()=>{
         try {
             fs.mkdirSync(path.join(process.env.APPDATA,"/ElectronNotes/data"),{recursive:true})
             fs.writeFile(path.join(process.env.APPDATA,dataPath),"[]", (res)=>{
-                console.log(res);
                 
             });
         } catch (error) {
-            console.log(error);
             
         }
      
@@ -26,7 +24,6 @@ const checkUserData = async ()=>{
       
     }
 
-    console.log("checked data");
 
     
 }
@@ -49,17 +46,14 @@ const editEntry = (id)=>{
     title : noteTitle,
     content : noteContent,
  }
-    console.log("editEntry Called");
     
     let oldData = fs.readFileSync(path.join(process.env.APPDATA,dataPath),'utf8')
-    console.log(`oldData: ${oldData}`);
-    console.log(`id ${id}`);
+
     
     oldData = JSON.parse(oldData)
 
      let editData = _.find(oldData, {'id': id});
     
-      console.log(`Note Edit info: ${JSON.stringify(editData)}`);
       
       return editData;
      
@@ -67,7 +61,6 @@ const editEntry = (id)=>{
 
 }
 const saveEdit = (content)=>{
-    console.log("Save edit called");
     
 content = JSON.parse(content);
 let oldData = fs.readFileSync(path.join(process.env.APPDATA,dataPath),'utf8')
@@ -75,19 +68,16 @@ oldData = JSON.parse(oldData)
 let objIndex = _.findIndex(oldData,{id:content.id})
 oldData.splice(objIndex, 1, {id: content.id, title: content.title, content: content.content});
 
-console.log();
 fs.writeFileSync(path.join(process.env.APPDATA,dataPath), JSON.stringify(oldData), 'utf-8')
 
 
  
 }
 const deleteEntry = (id)=>{
-    console.log("delete Called");
     
     let oldData = fs.readFileSync(path.join(process.env.APPDATA,dataPath),'utf8')
     oldData = JSON.parse(oldData);
     let data =  _.reject(oldData, {id:id})
-    console.log(`data: ----- \n ${JSON.stringify(data) } \n ----`);
     
 
       fs.writeFileSync(path.join(process.env.APPDATA,dataPath), JSON.stringify(data), 'utf-8')

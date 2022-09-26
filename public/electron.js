@@ -34,7 +34,6 @@ app.whenReady().then(()=>{
 
   ipcMain.handle('load-user-data', async (event)=>{
     let userData = await dataHandler.checkUserData();
-    console.log(userData);
     
     if(userData == null){
       return -1;
@@ -58,7 +57,6 @@ app.whenReady().then(()=>{
 
   ipcMain.handle('edit-note-entry', async (event, data)=>{
     let editData = await dataHandler.editEntry(data)
-    console.log(`handle edit data ${editData}`);
     
     if(editData == null){
       return -1;
@@ -70,7 +68,6 @@ app.whenReady().then(()=>{
   });
   ipcMain.handle('save-edit-note-entry', async (event, data)=>{
     let editData = await dataHandler.saveEdit(data)
-    console.log(`handle edit data ${editData}`);
     
     if(editData == null){
       return -1;
@@ -82,7 +79,6 @@ app.whenReady().then(()=>{
   });
 
   ipcMain.on('delete-note-entry', (event, id)=>{
-    console.log(id);
     
     dataHandler.deleteEntry(id)
   });

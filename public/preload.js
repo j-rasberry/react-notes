@@ -1,5 +1,4 @@
 const { contextBridge, ipcRenderer } = require('electron')
-console.log("preload loaded");
 
 contextBridge.exposeInMainWorld('API', {
     setTitle: (title) => ipcRenderer.send('set-title', title),

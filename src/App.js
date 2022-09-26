@@ -12,7 +12,7 @@ function App() {
              setForceRender={setForceRender}></NoteAddBtn>
         <NoteEntryList      forceRender={forceRender}
              setForceRender={setForceRender} ></NoteEntryList>
-        {/* <script src="./renderer.js"></script> */}
+      
 
     </div>
   );

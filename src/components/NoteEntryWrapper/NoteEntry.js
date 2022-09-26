@@ -1,6 +1,7 @@
 import {React, useRef, useState ,useEffect} from 'react';
 
 import './entry.css'
+import deleteIcon from './../../assets/delete.svg'
 
 
 
@@ -10,14 +11,12 @@ const NoteEntry = ({setEditorView, editorContent, setEditorContent ,forceRender,
 
 
 useEffect(() => {
-    console.log("effect calleed");
     
     window.API.loadUserData().then((res)=>{
  
 
         
         if(res === JSON.stringify(oldEntires.current)){
-            console.log("they are the");
             
         }else{
              
@@ -41,9 +40,7 @@ useEffect(() => {
                     <div className='entry-wrapper'>
                          
                     <div className='entry' onClick={ async ()=>{
-                console.log("edit button clicked");
                 setEditorContent(await window.API.editNoteEntry(data.id))
-                console.log({editorContent});
                 
                 setEditorView(true)
 
@@ -52,11 +49,11 @@ useEffect(() => {
                         <h1 className='entry-title'>{data.title}</h1>
                         <p className='entry-content'>{data.content}</p>
                     </div>
-              
-            <button className='entry-button-delete' onClick={()=>{
+                    <img src={deleteIcon}alt='delete item'  className='entry-button-delete' onClick={()=>{
                 window.API.deleteNoteEntry(data.id)
                 setForceRender(!forceRender)
-            }}></button>
+            }}></img>
+       
             <p></p>
                         </div>
                 )
